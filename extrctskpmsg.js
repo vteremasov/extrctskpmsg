@@ -3,9 +3,11 @@
 let sqlite3 = require('sqlite3').verbose()
   , squel = require('squel')
   , fs = require('fs')
-  , dbPath = '/home/vit/.Skype/teremasov_v/main.db'
-  , pattern = new RegExp('online|logged off|Logged off|I am on|logging off|Logging off')
+  , dbPath = '/home/' + (process.argv[2] || 'vit') +'/.Skype/' + (process.argv[3] || 'teremasov_v') + '/main.db'
+  , pattern = new RegExp(process.argv[5] || 'online|logged off|Logged off|I am on|logging off|Logging off')
+  , topic = process.argv[4] || "ClickHereDev"
   ;
+
 
 function getSqlForTopic(topic) {
   return squel.select()
@@ -51,5 +53,5 @@ function verifyChat(err, rows) {
 let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READONLY, err => {
   if (err) throw new Error(err);
   console.log('db connection opened...');
-  db.all(getSqlForTopic("ClickHereDev"), verifyChat)
+  db.all(getSqlForTopic(topic), verifyChat)
 });
