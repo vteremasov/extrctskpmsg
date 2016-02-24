@@ -1,4 +1,7 @@
 'use strict';
+//TODO make possible choose "friendlyname" instead of "topic"
+//TODO make console app
+//TODO add "help"
 
 let sqlite3 = require('sqlite3').verbose()
   , squel = require('squel')
